@@ -1,0 +1,12 @@
+{
+  "name": "Mise en Place",
+  "short_name": "Mise en Place",
+  "description": "Gestão do restaurante: estoque, contagens, fichas técnicas, compras e CMC",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#10302A",
+  "theme_color": "#10302A",
+  "lang": "pt-BR",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
