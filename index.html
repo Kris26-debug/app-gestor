@@ -666,6 +666,17 @@ button.flow-card:hover{background:var(--surface2)}
 .cm-p{font-family:var(--mono);font-size:15px}
 .cm-p.ok{color:var(--ok)}.cm-p.warn{color:var(--warn)}.cm-p.bad{color:var(--bad)}
 .cm-r small{color:var(--faint);font-size:11px}
+
+/* menu no formato OPPERA: ícones emoji + abas internas de módulo */
+.nav .ni.emo{font-size:16px;line-height:1}
+.nav.sair{color:var(--faint)}
+.nav.sair small{font-size:10.5px;color:var(--faint);font-weight:500}
+.nav.sair:hover{color:var(--bad);background:transparent}
+.mtabs{display:flex;gap:4px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:5px;align-self:flex-start;max-width:100%;overflow-x:auto}
+.mtab{all:unset;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap}
+.mtab:hover{background:var(--surface2);color:var(--text)}
+.mtab.on{background:var(--green);color:#fff}
+@media (max-width:640px){.nav.sair small{display:none}}
 </style>
 
 </head>
@@ -745,6 +756,20 @@ const NAV=[
   {k:'inventarios',n:'Inventários',s:'Inventário',i:'flag',admin:1},
   {k:'ajustes',n:'Ajustes',s:'Ajustes',i:'sliders',admin:1},
 ];
+/* Menu no formato OPPERA: cada módulo agrupa telas (abas internas) */
+const MENU=[
+  {k:'agenda',n:'Agenda do gestor',s:'Agenda',e:'📆',admin:1,views:[['agenda','Agenda']]},
+  {k:'compras',n:'Compras',s:'Compras',e:'🛒',admin:1,views:[['compras','Compras e pedidos'],['planilha','Planilha de compras'],['cotacoes','Cotações']]},
+  {k:'cozinha',n:'Cozinha de Produção',s:'Produção',e:'🏭',views:[['producao','Produções'],['fichas','Fichas técnicas']]},
+  {k:'escala',n:'Escala',s:'Escala',e:'📅',admin:1,views:[['escala','Escala']]},
+  {k:'eventos',n:'Eventos',s:'Eventos',e:'🎉',admin:1,views:[['eventos','Eventos']]},
+  {k:'financeiro',n:'Financeiro',s:'Financ.',e:'💳',admin:1,views:[['faturamento','Faturamento & CMC']]},
+  {k:'inventario',n:'Inventário',s:'Inventário',e:'📦',views:[['estoque','Estoque'],['contagens','Contagens'],['inventarios','Inventários',1]]},
+  {k:'bcg',n:'Matriz BCG',s:'BCG',e:'📊',admin:1,views:[['bcg','Matriz BCG']]},
+];
+const grpViews=g=>g.views.filter(v=>isAdmin()||!v[2]);
+const grpDe=view=>MENU.find(g=>g.views.some(v=>v[0]===view));
+
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
 const brl=n=>BRL.format(+n||0);
@@ -845,16 +870,16 @@ const prodOpts=(vazio='Selecione…',filtro)=>[['',vazio],...[...ativos()].filte
 const unidadeDe=id=>(P(id)||{}).unidade||'';
 
 function shell(){
-  const nav=NAV.filter(n=>n.k&&(isAdmin()||!n.admin));
-  if(!nav.find(n=>n.k===S.view))S.view='painel';
+  const menu=MENU.filter(g=>isAdmin()||!g.admin);
+  const ok=new Set(['painel',...(isAdmin()?['ajustes']:[]),...menu.flatMap(g=>grpViews(g).map(v=>v[0]))]);
+  if(!ok.has(S.view))S.view='painel';
   const pend=S.d.contagens.filter(c=>c.status==='enviada').length;const baixo=abaixoMin().length;
-  const badge={contagens:isAdmin()?pend:0,planilha:baixo};
-  const navBtn=(n,cls='')=>`<button class="nav ${cls} ${S.view===n.k?'on':''}" data-act="nav" data-k="${n.k}" title="${n.n}"><span class="ni">${ic(n.i)}</span><span class="nl">${n.n}</span><span class="ns">${n.s}</span>${badge[n.k]?`<span class="ct">${badge[n.k]}</span>`:''}</button>`;
-  const dash=nav.find(n=>n.k==='painel'),aj=nav.find(n=>n.k==='ajustes');
-  const mods=nav.filter(n=>n.k!=='painel'&&n.k!=='ajustes').sort((a,b)=>a.n.localeCompare(b.n,'pt-BR'));
+  const badge={inventario:isAdmin()?pend:0,compras:isAdmin()?baixo:0};
+  const gAt=grpDe(S.view);
+  const item=(act,k,e,n,sh,on,cls='',ct=0)=>`<button class="nav ${cls} ${on?'on':''}" data-act="${act}" data-k="${k}" title="${n}"><span class="ni emo">${e}</span><span class="nl">${n}</span><span class="ns">${sh}</span>${ct?`<span class="ct">${ct}</span>`:''}</button>`;
   const k=S.ui.setor||'';const setN=k?SETOR_N[k]:'Todos os setores';
   const setores=[['','Todos os setores'],...SETORES];
-  const acoes=isAdmin()?`<div class="acg-wrap"><button class="nav acg-btn ${S.ui.acoes?'open':''}" data-act="acoesTg" title="Ações"><span class="ni">${ic('down')}</span><span class="nl">Ações</span><span class="ns">Ações</span><span class="arw">▾</span></button>
+  const acoes=isAdmin()?`<div class="acg-wrap"><button class="nav acg-btn ${S.ui.acoes?'open':''}" data-act="acoesTg" title="Ações"><span class="ni emo">⚙️</span><span class="nl">Ações</span><span class="ns">Ações</span><span class="arw">▾</span></button>
     ${S.ui.acoes?`<div class="acg-menu" role="menu">
       <div class="acg-sec">Dashboard</div>
       <button class="acg-i" data-act="exp" data-k="painel" data-f="pdf">📄 Exportar PDF</button>
@@ -865,17 +890,19 @@ function shell(){
       <div class="acg-sep"></div><div class="acg-sec">Backup</div>
       <button class="acg-i" data-act="backup">💾 Baixar backup (JSON)</button>
     </div>`:''}</div>`:'';
+  const sub=gAt?grpViews(gAt):[];
+  const mtabs=sub.length>1?`<div class="mtabs" role="tablist">${sub.map(([v,n])=>`<button class="mtab ${S.view===v?'on':''}" data-act="nav" data-k="${v}" role="tab" aria-selected="${S.view===v}">${n}</button>`).join('')}</div>`:'';
   return `<div class="shell" data-setor="${k}"><aside class="side">
     <div class="brand"><div class="mk">M</div><div><b>Mise en Place</b><small>${esc(S.cfg.empresa||'Gestão do restaurante')}</small></div></div>
-    <nav>${dash?navBtn({...dash,n:'Dashboard',s:'Painel'},'nav-dash'):''}
-      <div class="navsep">Módulos</div>${mods.map(n=>navBtn(n)).join('')}
+    <nav>${item('nav','painel','▦','Dashboard','Painel',S.view==='painel','nav-dash')}
+      <div class="navsep">Módulos</div>${menu.map(g=>item('grp',g.k,g.e,g.n,g.s,gAt===g,'',badge[g.k])).join('')}
       <div class="navsep">Setor</div>
       <button class="setor-tg" data-act="setorTg" title="${setN}"><span class="dot" style="background:${k?`var(--c-${k})`:'var(--green)'}"></span><span class="nl">${setN}</span><span class="arw" style="${S.ui.setorMenu?'transform:rotate(180deg)':''}">▾</span></button>
       ${S.ui.setorMenu?`<div class="setor-list">${setores.map(([sk,sn])=>`<button class="setor-b ${k===sk?'on':''}" data-act="setor" data-k="${sk}" style="--sc:${sk?`var(--c-${sk})`:'#2f7d4f'}" title="${sn}"><span class="dot" style="background:var(--sc)"></span><span class="nl">${sn}</span></button>`).join('')}</div>`:''}
     </nav>
-    <div class="side-foot">${acoes}${aj?navBtn(aj):''}
-      <div class="who"><div><b>${isAdmin()?'Adm':'Equipe'}</b><small>${isAdmin()?'Acesso completo':'Contagens e produção'}</small></div><button data-act="logout">⏻ Sair</button></div></div>
-  </aside><main class="main"><div class="wrap${S.view==='painel'&&isAdmin()?' wide':''}">${banners()}${(V[S.view]||V.painel)()}</div></main></div>${drawer()}${confirmBox()}${copyBox()}${envBox()}`;
+    <div class="side-foot">${acoes}${isAdmin()?item('nav','ajustes','⚙️','Administração','Admin',S.view==='ajustes'):''}
+      <button class="nav sair" data-act="logout" title="Sair (${isAdmin()?'Adm':'Equipe'})"><span class="ni emo">⏻</span><span class="nl">Sair <small>· ${isAdmin()?'Adm':'Equipe'}</small></span><span class="ns">Sair</span></button></div>
+  </aside><main class="main"><div class="wrap${S.view==='painel'&&isAdmin()?' wide':''}">${banners()}${mtabs}${(V[S.view]||V.painel)()}</div></main></div>${drawer()}${confirmBox()}${copyBox()}${envBox()}`;
 }
 function banners(){let h='';
   if(S.local)h+=`<div class="note info"><b>Pré-visualização.</b> Nada está sendo salvo.</div>`;
@@ -1192,12 +1219,13 @@ function confirmar(t,m,fn,o={}){S.ui.confirm={t,m,fn,...o};render()}
 
 /* ================= ações ================= */
 const A={};
+A.grp=d=>{const g=MENU.find(x=>x.k===d.k);if(!g)return;const vs=grpViews(g);const last=S.ui.lastV&&S.ui.lastV[g.k];A.nav({k:vs.some(v=>v[0]===last)?last:vs[0][0]})};
 A.acoesTg=()=>{S.ui.acoes=!S.ui.acoes;render()};
 A.setorTg=()=>{S.ui.setorMenu=!S.ui.setorMenu;render()};
 A.setor=d=>{const k=d.k||'';S.ui.setor=k;S.ui.setorMenu=false;S.ui.est.setor=k;S.ui.pl.setor=k;render()};
 document.addEventListener('click',e=>{if(!S.ui||!S.ui.acoes)return;const inMenu=e.target.closest&&e.target.closest('.acg-menu [data-act]');const inWrap=e.target.closest&&e.target.closest('.acg-wrap');if(inMenu||!inWrap){S.ui.acoes=false;schedule()}},true);
 
-A.nav=d=>{S.view=d.k;S.ui.drawer=null;if(d.k!=='cotacoes')S.ui.cot=null;S.ui.fc=null;if(d.k!=='contagens')S.ui.ct=null;if(d.k==='ajustes')S.ui.cg=null;render();window.scrollTo(0,0)};
+A.nav=d=>{S.view=d.k;{const g=grpDe(d.k);if(g){S.ui.lastV=S.ui.lastV||{};S.ui.lastV[g.k]=d.k}}S.ui.drawer=null;if(d.k!=='cotacoes')S.ui.cot=null;S.ui.fc=null;if(d.k!=='contagens')S.ui.ct=null;if(d.k==='ajustes')S.ui.cg=null;render();window.scrollTo(0,0)};
 A.tab=d=>{S.ui.tab[d.g]=d.k;render()};
 async function hashPw(pw,salt){const enc=new TextEncoder();const key=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},key,256);return [...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 async function novaSenha(k,pw){const salt=uid()+uid()+uid();const doc={salt,hash:await hashPw(pw,salt),atualizadoEm:new Date().toISOString()};if(S.db)await S.db.doc('senhas/'+k).set(doc);else S.sen[k]=doc}
@@ -1412,6 +1440,13 @@ function cmcMini(r){return SETORES.map(([k,n])=>{const x=r[k];const meta=metaDe(
   return `<div class="cm-r s-${k}"><div class="cm-h"><span class="sp s-${k}"><span class="dot"></span>${n}</span><b class="cm-p ${s2}">${pct(x.p)}</b></div>
    <div class="meter"><i style="width:${Math.min(100,pv/esc2*100).toFixed(1)}%"></i><b style="left:${(meta/esc2*100).toFixed(1)}%"></b></div>
    <small>Meta ${nf(meta,1)}% · CMC ${brlK(x.cmc)} · fat. ${brlK(x.fat)}</small></div>`}).join('')}
+
+/* telas em modelagem (próximas etapas) */
+const emModelagem=(t,sub,itens)=>`${ph(t,sub)}<section class="panel"><div class="note info"><b>Em modelagem.</b> Esta tela entra na próxima etapa, seguindo o formato do OPPERA e a estética ARVO.</div>${itens?`<div class="att">${itens.map(x=>`<div class="row"><span>${x}</span></div>`).join('')}</div>`:''}</section>`;
+V.agenda=()=>emModelagem('Agenda do gestor','Lembretes e rotinas da semana',['Lembretes com data e hora, por setor','Rotinas fixas (CMV da semana, inventário, cotação)','Avisos que sobem para o Dashboard']);
+V.escala=()=>emModelagem('Escala','Escala da equipe por dia e turno',['Quadro semanal por pessoa e função','Folgas e trocas','Custo de mão de obra da semana']);
+V.eventos=()=>emModelagem('Eventos','Controle de custos por evento',['Agenda de eventos com convidados e faturamento','Custos e sobras por evento','CMC/CMV e resultado do evento']);
+V.bcg=()=>emModelagem('Matriz BCG','Engenharia de cardápio: popularidade × margem',['Importar a curva ABC de vendas do PDV','Cruzar com o CMV das fichas técnicas','Estrelas, Vacas leiteiras, Interrogações e Abacaxis']);
 V.painel=()=>{
   if(!isAdmin())return painelEquipe();
   gidN=0;const R=dashRange();const rows=serieDiaria(R.a,R.b);const k=S.ui.setor||'';
