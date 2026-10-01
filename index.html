@@ -582,6 +582,90 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green)}
 .lopt.on{border-color:var(--green)}
 
 .toast{border-radius:10px}
+
+/* ================================================================
+   ESTRUTURA OPPERA (formato) + pele ARVO (cores/fontes)
+   ================================================================ */
+/* cor de destaque muda conforme o setor escolhido no painel lateral */
+.shell[data-setor="cozinha"]{--green:#b0432f;--green2:#8f3524;--btn:#b0432f;--accent:#b0432f}
+.shell[data-setor="bar"]{--green:#2e5f78;--green2:#244b5f;--btn:#2e5f78;--accent:#2e5f78}
+.shell[data-setor="adega"]{--green:#7c4a1e;--green2:#5f3815;--btn:#7c4a1e;--accent:#7c4a1e}
+.tab.on,.dh .seg button.on{background:var(--green)}
+.tabs{border-bottom-color:var(--green)}
+.ph,.dh{border-bottom-color:var(--green)}
+
+/* ---- barra lateral: Dashboard em destaque · Módulos · Setor · rodapé ---- */
+.side{gap:0;overflow:hidden}
+.side .brand{flex-shrink:0;margin-bottom:10px}
+.side nav{order:0;flex:1;overflow-y:auto;overflow-x:hidden;gap:1px;padding-bottom:8px}
+.nav.nav-dash{background:var(--green);color:#fff;font-weight:700;margin-bottom:2px}
+.nav.nav-dash:hover{background:var(--green2);color:#fff}
+.nav.nav-dash.on{box-shadow:inset 3px 0 0 rgba(255,255,255,.55)}
+.navsep{padding:14px 10px 6px}
+.setor-tg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border-radius:9px;border:1px solid var(--inp);background:var(--surface2);color:var(--text);font-size:12.5px;font-weight:700}
+.setor-tg:hover{border-color:var(--green)}
+.setor-tg .nl{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arw{font-size:10px;opacity:.6;transition:transform .2s;margin-left:auto}
+.setor-tg .dot,.setor-b .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.setor-list{display:flex;flex-direction:column;gap:1px;margin-top:4px}
+.setor-b{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:9px;width:100%;padding:7px 10px;border-radius:9px;border:1px solid transparent;color:var(--muted);font-size:12.5px;font-weight:600}
+.setor-b:hover{background:#ece5d8;color:var(--text)}
+.setor-b.on{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 10%,transparent);color:var(--text)}
+.side-foot{flex-shrink:0;border-top:1px solid var(--line);padding-top:8px;display:flex;flex-direction:column;gap:1px}
+.side-foot .who{order:0;border-top:0;padding:8px 7px 0}
+.acg-wrap{position:relative}
+.acg-btn.open{background:#ece5d8;color:var(--text)}
+.acg-menu{position:absolute;left:0;right:0;bottom:calc(100% + 6px);background:var(--surface);border:1px solid var(--inp);border-radius:11px;box-shadow:0 10px 30px rgba(44,40,34,.16);z-index:40;padding:6px 0;min-width:210px}
+.acg-sec{padding:6px 14px 4px;font-size:9px;color:var(--faint);text-transform:uppercase;font-weight:700;letter-spacing:.1em}
+.acg-sep{height:1px;background:var(--line);margin:5px 0}
+.acg-i{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;padding:8px 14px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.acg-i:hover{background:var(--surface2);color:var(--green)}
+@media (max-width:640px){
+  .setor-tg{justify-content:center;padding:8px 0}.setor-tg .nl,.setor-tg .arw,.setor-b .nl{display:none}
+  .setor-b{justify-content:center}
+  .acg-menu{left:0;right:auto}
+  .side-foot .who{justify-content:center}
+}
+
+/* ---- Dashboard formato OPPERA ---- */
+.dh h1 .acc{color:color-mix(in srgb,var(--green) 45%,#fff)}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.flow{grid-template-columns:minmax(0,1fr)}}
+.flow-card{all:unset;box-sizing:border-box;display:block;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--fc,var(--green));border-radius:0 12px 12px 0;padding:16px 18px;min-width:0}
+button.flow-card{cursor:pointer}
+button.flow-card:hover{background:var(--surface2)}
+.flow-card.c1{--fc:#2e5f78}.flow-card.c2{--fc:#a5731a}.flow-card.c3{--fc:#2f7d4f}.flow-card.c4{--fc:#7c4a1e}
+.flow-eyebrow{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:10px}
+.flow-big{font-family:var(--mono);font-size:24px;font-weight:600;line-height:1;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flow-note{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.5}
+.dash8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.dash8 .span2{grid-column:span 2}
+@media (max-width:1100px){.dash8{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.dash8{grid-template-columns:minmax(0,1fr)}.dash8 .span2{grid-column:auto}}
+.d8{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--fc,var(--green));border-radius:0 12px 12px 0;padding:14px 16px;display:flex;flex-direction:column;min-width:0}
+.d8 .flow-eyebrow{margin-bottom:8px}
+.d8-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.d8-sub{font-weight:400;text-transform:none;letter-spacing:0}
+.d8-h .lnk{font-size:12px;white-space:nowrap}
+.d8-tot{font-family:var(--mono);font-size:15px;font-weight:600}
+.d8-body{max-height:240px;overflow-y:auto;min-height:0}
+.d8-empty{color:var(--faint);font-size:13px;padding:6px 0}
+.b-av{--fc:#d9a441}.b-co{--fc:#2e5f78}.b-ca{--fc:#2e5f78}.b-se{--fc:#2f7d4f}.b-cm{--fc:#7c4a1e}.b-at{--fc:#2f7d4f}
+.d8 .tl .it{padding:7px 0}
+.d8 .tl .ic2{width:30px;height:30px}
+.hb-r{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.hb-l{font-size:12px;color:var(--text);width:118px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb-t{flex:1;background:var(--line2);border-radius:4px;height:12px;overflow:hidden}
+.hb-t i{display:block;height:100%;border-radius:4px}
+.hb-v{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:86px;text-align:right}
+.d8:not(.span2) .hb-r{flex-wrap:wrap;gap:3px 8px;margin-bottom:9px}.d8:not(.span2) .hb-l{flex:1;width:auto}.d8:not(.span2) .hb-v{min-width:0}.d8:not(.span2) .hb-t{order:3;flex-basis:100%;height:9px}
+.cm-r{padding:7px 0;border-bottom:1px solid var(--line2);display:flex;flex-direction:column;gap:6px}
+.cm-r:last-child{border-bottom:0}
+.cm-h{display:flex;justify-content:space-between;align-items:center}
+.cm-p{font-family:var(--mono);font-size:15px}
+.cm-p.ok{color:var(--ok)}.cm-p.warn{color:var(--warn)}.cm-p.bad{color:var(--bad)}
+.cm-r small{color:var(--faint);font-size:11px}
 </style>
 
 </head>
@@ -761,15 +845,36 @@ const prodOpts=(vazio='Selecione…',filtro)=>[['',vazio],...[...ativos()].filte
 const unidadeDe=id=>(P(id)||{}).unidade||'';
 
 function shell(){
-  const nav=NAV.filter(n=>isAdmin()||!n.admin);
+  const nav=NAV.filter(n=>n.k&&(isAdmin()||!n.admin));
   if(!nav.find(n=>n.k===S.view))S.view='painel';
   const pend=S.d.contagens.filter(c=>c.status==='enviada').length;const baixo=abaixoMin().length;
   const badge={contagens:isAdmin()?pend:0,planilha:baixo};
-  const me=S.me||{};
-  return `<div class="shell"><aside class="side">
-    <div class="top"><div class="brand"><div class="mk">M</div><div><b>Mise en Place</b><small>${esc(S.cfg.empresa||'Gestão do restaurante')}</small></div></div>
-    <div class="who"><div><b>${isAdmin()?'Adm':'Equipe'}</b><small>${isAdmin()?'Acesso completo':'Contagens e produção'}</small></div><button data-act="logout">Sair</button></div></div>
-    <nav>${nav.map(n=>n.sep?`<div class="navsep">${n.sep}</div>`:`<button class="nav ${S.view===n.k?'on':''}" data-act="nav" data-k="${n.k}" title="${n.n}"><span class="ni">${ic(n.i)}</span><span class="nl">${n.n}</span><span class="ns">${n.s}</span>${badge[n.k]?`<span class="ct">${badge[n.k]}</span>`:''}</button>`).join('')}</nav>
+  const navBtn=(n,cls='')=>`<button class="nav ${cls} ${S.view===n.k?'on':''}" data-act="nav" data-k="${n.k}" title="${n.n}"><span class="ni">${ic(n.i)}</span><span class="nl">${n.n}</span><span class="ns">${n.s}</span>${badge[n.k]?`<span class="ct">${badge[n.k]}</span>`:''}</button>`;
+  const dash=nav.find(n=>n.k==='painel'),aj=nav.find(n=>n.k==='ajustes');
+  const mods=nav.filter(n=>n.k!=='painel'&&n.k!=='ajustes').sort((a,b)=>a.n.localeCompare(b.n,'pt-BR'));
+  const k=S.ui.setor||'';const setN=k?SETOR_N[k]:'Todos os setores';
+  const setores=[['','Todos os setores'],...SETORES];
+  const acoes=isAdmin()?`<div class="acg-wrap"><button class="nav acg-btn ${S.ui.acoes?'open':''}" data-act="acoesTg" title="Ações"><span class="ni">${ic('down')}</span><span class="nl">Ações</span><span class="ns">Ações</span><span class="arw">▾</span></button>
+    ${S.ui.acoes?`<div class="acg-menu" role="menu">
+      <div class="acg-sec">Dashboard</div>
+      <button class="acg-i" data-act="exp" data-k="painel" data-f="pdf">📄 Exportar PDF</button>
+      <button class="acg-i" data-act="exp" data-k="painel" data-f="xlsx">📊 Exportar Excel</button>
+      <div class="acg-sep"></div><div class="acg-sec">Lançar</div>
+      <button class="acg-i" data-act="novaCompra">🛒 Nova compra</button>
+      <button class="acg-i" data-act="nav" data-k="faturamento">💵 Faturamento do dia</button>
+      <div class="acg-sep"></div><div class="acg-sec">Backup</div>
+      <button class="acg-i" data-act="backup">💾 Baixar backup (JSON)</button>
+    </div>`:''}</div>`:'';
+  return `<div class="shell" data-setor="${k}"><aside class="side">
+    <div class="brand"><div class="mk">M</div><div><b>Mise en Place</b><small>${esc(S.cfg.empresa||'Gestão do restaurante')}</small></div></div>
+    <nav>${dash?navBtn({...dash,n:'Dashboard',s:'Painel'},'nav-dash'):''}
+      <div class="navsep">Módulos</div>${mods.map(n=>navBtn(n)).join('')}
+      <div class="navsep">Setor</div>
+      <button class="setor-tg" data-act="setorTg" title="${setN}"><span class="dot" style="background:${k?`var(--c-${k})`:'var(--green)'}"></span><span class="nl">${setN}</span><span class="arw" style="${S.ui.setorMenu?'transform:rotate(180deg)':''}">▾</span></button>
+      ${S.ui.setorMenu?`<div class="setor-list">${setores.map(([sk,sn])=>`<button class="setor-b ${k===sk?'on':''}" data-act="setor" data-k="${sk}" style="--sc:${sk?`var(--c-${sk})`:'#2f7d4f'}" title="${sn}"><span class="dot" style="background:var(--sc)"></span><span class="nl">${sn}</span></button>`).join('')}</div>`:''}
+    </nav>
+    <div class="side-foot">${acoes}${aj?navBtn(aj):''}
+      <div class="who"><div><b>${isAdmin()?'Adm':'Equipe'}</b><small>${isAdmin()?'Acesso completo':'Contagens e produção'}</small></div><button data-act="logout">⏻ Sair</button></div></div>
   </aside><main class="main"><div class="wrap${S.view==='painel'&&isAdmin()?' wide':''}">${banners()}${(V[S.view]||V.painel)()}</div></main></div>${drawer()}${confirmBox()}${copyBox()}${envBox()}`;
 }
 function banners(){let h='';
@@ -1087,6 +1192,11 @@ function confirmar(t,m,fn,o={}){S.ui.confirm={t,m,fn,...o};render()}
 
 /* ================= ações ================= */
 const A={};
+A.acoesTg=()=>{S.ui.acoes=!S.ui.acoes;render()};
+A.setorTg=()=>{S.ui.setorMenu=!S.ui.setorMenu;render()};
+A.setor=d=>{const k=d.k||'';S.ui.setor=k;S.ui.setorMenu=false;S.ui.est.setor=k;S.ui.pl.setor=k;render()};
+document.addEventListener('click',e=>{if(!S.ui||!S.ui.acoes)return;const inMenu=e.target.closest&&e.target.closest('.acg-menu [data-act]');const inWrap=e.target.closest&&e.target.closest('.acg-wrap');if(inMenu||!inWrap){S.ui.acoes=false;schedule()}},true);
+
 A.nav=d=>{S.view=d.k;S.ui.drawer=null;if(d.k!=='cotacoes')S.ui.cot=null;S.ui.fc=null;if(d.k!=='contagens')S.ui.ct=null;if(d.k==='ajustes')S.ui.cg=null;render();window.scrollTo(0,0)};
 A.tab=d=>{S.ui.tab[d.g]=d.k;render()};
 async function hashPw(pw,salt){const enc=new TextEncoder();const key=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},key,256);return [...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,'0')).join('')}
@@ -1293,38 +1403,44 @@ function atencao2(){const b=abaixoMin().sort((a,c)=>(a.qtd/a.minimo)-(c.qtd/c.mi
   const inv=invs().at(-1);const dd=inv?difDias(inv.data,hoje()):null;if(!inv||dd>35)it.push(`<div class="it"><div class="ic2 info">${ic('flag')}</div><div><b>${inv?`Último inventário há ${dd} dias`:'Nenhum inventário fechado'}</b><small>Feche um inventário para medir o CMC do período</small></div><button class="go" data-act="nav" data-k="inventarios">Abrir</button></div>`);
   return it.length?`<div class="tl">${it.join('')}</div>`:`<div class="empty">Tudo em ordem por aqui.</div>`}
 
+const PAL=['#2c2822','#2e5f78','#a5731a','#2f7d4f','#b0432f','#7c4a1e','#5a7a2a','#6b5b95','#1a8a7a','#8a8272'];
+function hbars(list,vazio){if(!list.length)return `<div class="d8-empty">${vazio||'Sem dados ainda.'}</div>`;const mx=Math.max(...list.map(x=>x.v))||1;
+  return `<div class="hb">${list.map((x,i)=>`<div class="hb-r"><span class="hb-l" title="${esc(x.l)}">${esc(x.l)}</span><div class="hb-t"><i style="width:${Math.max(3,x.v/mx*100).toFixed(0)}%;background:${x.c||PAL[i%PAL.length]}"></i></div><span class="hb-v">${brl(x.v)}</span></div>`).join('')}</div>`}
+function comprasForn(a,b,k){const g={};for(const c of S.d.compras){if(c.status!=='recebida'||!inR(c.data,a,b))continue;const x=compraSet(c);const v=k?x[k]:sum(SETORES,([s])=>x[s]);if(v>0){const f=c.fornecedor||'Sem fornecedor';g[f]=(g[f]||0)+v}}return Object.entries(g).map(([l,v])=>({l,v})).sort((x,y)=>y.v-x.v)}
+function estoqueCat(k){const g={};for(const p of ativos()){if(k&&p.setor!==k)continue;const v=Math.max(0,+p.qtd||0)*(+p.custo||0);if(v>0){const c=p.categoria||'Sem categoria';g[c]=(g[c]||0)+v}}return Object.entries(g).map(([l,v])=>({l,v})).sort((x,y)=>y.v-x.v)}
+function cmcMini(r){return SETORES.map(([k,n])=>{const x=r[k];const meta=metaDe(k);const s2=st(x.p,meta);const pv=isFinite(x.p)?x.p*100:0;const esc2=Math.max(meta*1.6,pv,1);
+  return `<div class="cm-r s-${k}"><div class="cm-h"><span class="sp s-${k}"><span class="dot"></span>${n}</span><b class="cm-p ${s2}">${pct(x.p)}</b></div>
+   <div class="meter"><i style="width:${Math.min(100,pv/esc2*100).toFixed(1)}%"></i><b style="left:${(meta/esc2*100).toFixed(1)}%"></b></div>
+   <small>Meta ${nf(meta,1)}% · CMC ${brlK(x.cmc)} · fat. ${brlK(x.fat)}</small></div>`}).join('')}
 V.painel=()=>{
   if(!isAdmin())return painelEquipe();
-  gidN=0;const R=dashRange();const rows=serieDiaria(R.a,R.b);const prev=serieDiaria(R.pa,R.pb);
-  const fat=sum(rows,r=>r.t),fatP=sum(prev,r=>r.t),comp=sum(rows,r=>r.c),compP=sum(prev,r=>r.c);
-  const {inv,r}=cmcAtual();const t=r.total;const mp=metaPond(r);const v=valorSetor(S.d.produtos);const vt=v.cozinha+v.bar+v.adega;
-  const mix={cozinha:sum(rows,x=>x.cozinha),bar:sum(rows,x=>x.bar),adega:sum(rows,x=>x.adega)};
-  const hr=new Date().getHours();const saud=hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';const nome=S.me&&S.me.name?', '+esc(S.me.name.split(' ')[0]):'';
-  const diasFat=rows.filter(x=>x.t>0).length;const cmcCol=st(t.p,mp);
-  return `<div class="dh"><div><div class="eyebrow">${(d=>d[0].toUpperCase()+d.slice(1))(new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}))}</div><h1>${saud}, gestor</h1></div>
-   <div class="acts"><div class="seg" role="tablist" aria-label="Período">${[['7','7 dias'],['30','30 dias'],['mes','Mês']].map(([k,n])=>`<button class="${(S.ui.dash||'30')===k?'on':''}" data-act="dash" data-k="${k}" role="tab" aria-selected="${(S.ui.dash||'30')===k}">${n}</button>`).join('')}</div>
-   ${io('painel')}<button class="btn ghost" data-act="nav" data-k="faturamento">Lançar faturamento</button><button class="btn" data-act="novaCompra">Lançar compra</button></div></div>
-  <section class="kpis">
-   <div class="kpi"><div class="lb"><span class="ic">${ic('trend')}</span>Faturamento</div><div class="v">${brl(fat)}</div><div class="ft">${delta(fat,fatP)}<span>${R.cmp}</span></div>${spark(rows.map(x=>x.t),'var(--ok)')}</div>
-   <div class="kpi"><div class="lb"><span class="ic">${ic('pct')}</span>CMC geral agora</div><div class="v" style="color:${cmcCol==='ok'?'var(--ok)':cmcCol==='warn'?'var(--warn)':cmcCol==='bad'?'var(--bad)':'inherit'}">${pct(t.p)}</div><div class="ft"><span class="pill ${cmcCol}">${stLabel[cmcCol]}</span><span>meta ${nf(mp,1)}%</span></div>
-    <div class="splitbar" title="CMC por setor">${SETORES.map(([k])=>`<i class="s-${k}" style="flex:${Math.max(0.001,r[k].cmc)}"></i>`).join('')}</div><div class="minileg">${SETORES.map(([k,n])=>`<span class="s-${k}"><span class="dot"></span>${n} ${pct(r[k].p)}</span>`).join('')}</div></div>
-   <div class="kpi"><div class="lb"><span class="ic">${ic('cart')}</span>Compras recebidas</div><div class="v">${brl(comp)}</div><div class="ft">${delta(comp,compP,false)}<span>${fat?pct(comp/fat)+' do faturamento':''}</span></div>${spark(rows.map(x=>x.c),'var(--info)')}</div>
-   <div class="kpi"><div class="lb"><span class="ic">${ic('box')}</span>Valor em estoque</div><div class="v">${brl(vt)}</div><div class="ft"><span>${ativos().length} produtos</span>${abaixoMin().length?`<span class="dl down">${abaixoMin().length} abaixo do mínimo</span>`:''}</div>
-    <div class="splitbar">${SETORES.map(([k])=>`<i class="s-${k}" style="flex:${Math.max(0.001,v[k])}"></i>`).join('')}</div><div class="minileg">${SETORES.map(([k,n])=>`<span class="s-${k}"><span class="dot"></span>${n} ${brlK(v[k])}</span>`).join('')}</div></div>
-  </section>
-  <div class="dlay"><div class="col">
-   <section class="card"><div class="card-h"><div><h3>Faturamento por setor</h3><p>${diasFat} dia${diasFat===1?'':'s'} com lançamento ${R.label}</p></div><div class="big2">${brl(fat)}</div></div>${areaChart(rows,'hc1')}
-    <div class="legend">${SETORES.map(([k,n])=>`<span class="s-${k}"><span class="dot"></span>${n}</span>`).join('')}<span>Passe o mouse no gráfico para ver cada dia</span></div></section>
-   <div class="pair"><section class="card"><div class="card-h"><div><h3>Média por dia da semana</h3><p>Últimas 8 semanas · em R$ mil</p></div></div>${semana()}</section>
-    <section class="card"><div class="card-h"><div><h3>Atividade recente</h3><p>Compras, produção, contagens e inventários</p></div></div>${atividades()}</section></div>
-   <section class="card"><div class="card-h"><div><h3>Participação no faturamento</h3><p>${R.label[0].toUpperCase()+R.label.slice(1)} · média ${diasFat?brlK(fat/diasFat):'—'} por dia</p></div></div>
-    <div class="donutw" style="gap:32px"><div class="donut">${donut(mix)}<div class="c"><small>Total</small><b>${brlK(fat)}</b></div></div>
-    <div class="dleg">${SETORES.map(([k,n])=>`<div class="s-${k}"><span class="dot"></span><span>${n} <em>${pct(fat?mix[k]/fat:NaN)}</em></span><b>${brl(mix[k])}</b></div>`).join('')}</div></div></section>
-  </div><aside class="col">
-   <section class="card"><div class="card-h"><div><h3>CMC em tempo real</h3><p>${inv?`Desde o inventário de ${fdt(inv.data)}`:'Feche o primeiro inventário para medir o CMC'}</p></div><button class="lnk" data-act="nav" data-k="inventarios">Inventários →</button></div>
-    <div>${SETORES.map(([k,n])=>ringRow(k,n,r[k])).join('')}</div></section>
-   <section class="card"><div class="card-h"><div><h3>Precisa de atenção</h3><p>O que resolver hoje</p></div></div>${atencao2()}</section>
-  </aside></div>`};
+  gidN=0;const R=dashRange();const rows=serieDiaria(R.a,R.b);const k=S.ui.setor||'';
+  const fat=sum(rows,x=>k?x[k]:x.t),fatP=sum(serieDiaria(R.pa,R.pb),x=>k?x[k]:x.t);
+  const cA=somaCompras(R.a,R.b),cP=somaCompras(R.pa,R.pb);const comp=k?cA[k]:sum(SETORES,([s])=>cA[s]),compP=k?cP[k]:sum(SETORES,([s])=>cP[s]);
+  const {inv,r}=cmcAtual();const cmcP=k?r[k].p:r.total.p;const meta=k?metaDe(k):metaPond(r);const cs=st(cmcP,meta);
+  const v=valorSetor(S.d.produtos);const est=k?v[k]:v.cozinha+v.bar+v.adega;
+  const prods=ativos().filter(p=>!k||p.setor===k);const ab=abaixoMin().filter(p=>!k||p.setor===k).length;
+  const setN=k?SETOR_N[k]:'Todos os setores';const cf=comprasForn(R.a,R.b,k);
+  const cor={ok:'var(--ok)',warn:'var(--warn)',bad:'var(--bad)','':'inherit'}[cs];
+  return `<div class="dh"><div><div class="eyebrow">${(d=>d[0].toUpperCase()+d.slice(1))(new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}))}</div><h1>Dashboard · <span class="acc">${setN}</span></h1></div>
+   <div class="acts"><div class="seg" role="tablist" aria-label="Período">${[['7','7 dias'],['30','30 dias'],['mes','Mês']].map(([kk,n])=>`<button class="${(S.ui.dash||'30')===kk?'on':''}" data-act="dash" data-k="${kk}" role="tab" aria-selected="${(S.ui.dash||'30')===kk}">${n}</button>`).join('')}</div>
+   <button class="btn ghost" data-act="nav" data-k="faturamento">Lançar faturamento</button><button class="btn" data-act="novaCompra">Lançar compra</button></div></div>
+  <div class="flow">
+   <div class="flow-card c1"><div class="flow-eyebrow">📦 Estoque${k?' · '+setN:''}</div><div class="flow-big">${brl(est)}</div><div class="flow-note">${prods.length} produtos${ab?` · <b style="color:var(--bad)">${ab} abaixo do mínimo</b>`:''}</div></div>
+   <div class="flow-card c2"><div class="flow-eyebrow">💵 Faturamento</div><div class="flow-big">${brl(fat)}</div><div class="flow-note">${delta(fat,fatP)} ${R.label}</div></div>
+   <div class="flow-card c3"><div class="flow-eyebrow">🛒 Compras recebidas</div><div class="flow-big">${brl(comp)}</div><div class="flow-note">${delta(comp,compP,false)} ${fat?pct(comp/fat)+' do faturamento':R.label}</div></div>
+   <button class="flow-card c4" data-act="nav" data-k="inventarios"><div class="flow-eyebrow">💰 CMC agora <span style="float:right">→</span></div><div class="flow-big" style="color:${cor}">${pct(cmcP)}</div><div class="flow-note">Meta ${nf(meta,1)}% · ${stLabel[cs]}${inv?` · desde ${fdt(inv.data)}`:''}</div></button>
+  </div>
+  <div class="dash8">
+   <section class="d8 span2 b-av"><div class="flow-eyebrow">🔔 Avisos</div><div class="d8-body">${atencao2()}</div></section>
+   <section class="d8 span2 b-co"><div class="d8-h"><div class="flow-eyebrow">🛒 Compras ${R.label} <span class="d8-sub">· por fornecedor</span></div><b class="d8-tot">${brl(comp)}</b></div><div class="d8-body">${hbars(cf.slice(0,8),'Nenhuma compra recebida no período.')}</div></section>
+   <section class="d8 b-ca"><div class="flow-eyebrow">📊 Estoque por categoria</div><div class="d8-body">${hbars(estoqueCat(k).slice(0,10),'Cadastre produtos com custo e quantidade.')}</div></section>
+   <section class="d8 b-se"><div class="flow-eyebrow">🍳 Estoque por setor</div><div class="d8-body">${hbars(SETORES.map(([s,n])=>({l:n,v:v[s],c:`var(--c-${s})`})).filter(x=>x.v>0),'Sem estoque valorizado.')}</div></section>
+   <section class="d8 b-cm"><div class="d8-h"><div class="flow-eyebrow">💰 CMC por setor</div><button class="lnk" data-act="nav" data-k="inventarios">Inventários →</button></div><div class="d8-body">${cmcMini(r)}</div></section>
+   <section class="d8 b-at"><div class="flow-eyebrow">🏭 Atividade recente</div><div class="d8-body">${atividades()}</div></section>
+  </div>
+  <section class="card"><div class="card-h"><div><h3>Faturamento por setor</h3><p>${rows.filter(x=>x.t>0).length} dias com lançamento ${R.label}</p></div><div class="big2">${brl(sum(rows,x=>x.t))}</div></div>${areaChart(rows,'hc1')}
+   <div class="legend">${SETORES.map(([kk,n])=>`<span class="s-${kk}"><span class="dot"></span>${n}</span>`).join('')}<span>Passe o mouse no gráfico para ver cada dia</span></div></section>`};
 A.dash=d=>{S.ui.dash=d.k;render()};
 A.dashCompras=()=>{S.view='compras';S.ui.tab.compras='orcamento';render();window.scrollTo(0,0)};
 document.addEventListener('pointermove',hcMove);
